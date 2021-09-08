@@ -1,0 +1,103 @@
+﻿@model List<EmployeeInRoleViewModel>
+
+@{
+    ViewData["Title"] = "EditUsersInRole";
+}
+
+<h1 class="text-center">EditUsersInRole</h1>
+
+@{
+    string Id = ViewBag.roleId;
+}
+
+ 
+<hr />
+<div class="container text-center">
+    <div class="row">
+        <div class="col-5 mx-auto">
+            <form method="post" asp-action="EditUsersInRole" asp-controller="Administration">
+
+                @for (int i = 0; i < Model.Count; i++ )
+                {
+
+                    if (Model[i].EmployeeEmail == User.Identity.Name)
+                    {
+                        <div class="form-check">
+                            <input type="hidden" asp-for="@Model[i].EmployeeId" />
+                            <input type="hidden" asp-for="@Model[i].EmployeeName" />
+                            <input type="hidden" asp-for="@Model[i].EmployeeEmail" />
+                            <input type="hidden" asp-for="@Model[i].IsSelected" class="form-check-input" />
+                            <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].EmployeeName (@Model[i].EmployeeEmail)</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-check">
+                            <input type="hidden" asp-for="@Model[i].EmployeeId" />
+                            <input type="hidden" asp-for="@Model[i].EmployeeName" />
+                            <input type="hidden" asp-for="@Model[i].EmployeeEmail" />
+                            <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                            <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].EmployeeName (@Model[i].EmployeeEmail)</label>
+                        </div>
+
+                    }
+                }
+                <hr />
+                <input type="submit" value="Update List" class="btn btn-success" />
+                <hr />
+
+            </form>
+
+            @*
+
+        <div class="row">
+            <form method="post" asp-action="EditUsersInRole" asp-controller="Administration">
+
+                        <div class="col">
+                            <div class="col-md">
+                                <div class="card text-white  mb-3" id="orders-pending">
+                                    <div class="card-header text-center">
+                                        <h5 class="card-title">Orders Pending</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        @for (int i = 0; i < Model.Count; i++)
+                                        {
+
+                                            if (Model[i].EmployeeEmail == User.Identity.Name)
+                                            {
+                                                <div class="form-check">
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeId" />
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeName" />
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeEmail" />
+                                                    <input type="hidden" asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                                    <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].EmployeeName (@Model[i].EmployeeEmail)</label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check">
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeId" />
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeName" />
+                                                    <input type="hidden" asp-for="@Model[i].EmployeeEmail" />
+                                                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                                    <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].EmployeeName (@Model[i].EmployeeEmail)</label>
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </form>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

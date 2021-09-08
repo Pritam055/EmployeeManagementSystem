@@ -1,0 +1,79 @@
+﻿@model EMS.ViewModels.EditEmployeeViewModel
+
+@{
+    ViewData["Title"] = "EditEmployee";
+    var ImagePath = "~/images/" + (Model.ExistingPhotoPath?? "default.png"); 
+}
+ 
+<div class="container">
+    <h1 class="text-center">EditEmployee</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 m-auto">
+            <form asp-action="EditEmployee" asp-controller="Employee" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+                <input asp-for="Id" hidden class="form-control" />
+                <input asp-for="ExistingPhotoPath" hidden /> 
+                <div class="form-group">
+                    <label asp-for="EmployeeName" class="control-label"></label>
+                    <input asp-for="EmployeeName" class="form-control" />
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalSalary" class="control-label"></label>
+                    <input asp-for="TotalSalary" class="form-control" />
+                    <span asp-validation-for="TotalSalary" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PF" class="control-label"></label>
+                    <input asp-for="PF" class="form-control" />
+                    <span asp-validation-for="PF" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Photo" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="Photo" class="form-control custom-file-input" />
+                        <label class="custom-file-label">Click here to change photo</label>
+                    </div>
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <img src="@ImagePath" style="height:120px;width:120px;" class="imageThumbnail" asp-append-version="true" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-success" />
+                    <a asp-action="ListEmployee" asp-controller="Employee" class="btn btn-primary">Back to List</a>
+                </div>
+
+
+                @section Scripts{
+                    <script>
+                        $(document).ready(function () {
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).next('.custom-file-label').html(fileName);
+                            });
+                        });
+                    </script>
+                }
+
+            </form>
+        </div>
+    </div>
+
+</div>
+ 
+

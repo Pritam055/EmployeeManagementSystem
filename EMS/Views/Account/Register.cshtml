@@ -1,0 +1,92 @@
+﻿    @model RegisterViewModel
+
+    @{
+        ViewData["Title"] = "Register";
+    }
+
+    <h1 class="text-center">Employee Register</h1>
+
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form asp-action="Register" asp-controller="Account" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="EmployeeName" class="control-label"></label>
+                        <input asp-for="EmployeeName" class="form-control" />
+                        <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TotalSalary" class="control-label"></label>
+                        <input asp-for="TotalSalary" class="form-control" />
+                        <span asp-validation-for="TotalSalary" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PF" class="control-label"></label>
+                        <input asp-for="PF" class="form-control" />
+                        <span asp-validation-for="PF" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Photo" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="Photo" class="form-control custom-file-input" />
+                            <label class="custom-file-label">Choose File...</label>
+                        </div>
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+
+
+                    @section Scripts{
+                        <script>
+                            $(document).ready(function () {
+                                $(".custom-file-input").on("change", function () {
+                                    var fileName = $(this).val().split("\\").pop();
+                                    $(this).next('.custom-file-label').html(fileName);
+                                })
+                            })
+                        </script>
+                    }
+
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-primary" />
+                    <a asp-action="ListEmployee" asp-controller="Employee" class="ml-2 btn btn-outline-secondary">Back to List</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    @*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

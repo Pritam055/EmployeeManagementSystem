@@ -1,0 +1,116 @@
+﻿@model IEnumerable<IdentityRole>
+
+
+@{
+    ViewData["Title"] = "ListRoles";
+}
+
+<style>
+    #logo {
+    }
+
+    body {
+        background-color: #ebeff5;
+    }
+
+
+    #total-orders {
+        @*background-color: #4cb4c7;*@
+        background-color: rgb(109 164 167);
+        ;
+    }
+
+
+    #orders-delivered {
+        background-color: #7abecc;
+    }
+
+    #orders-pending {
+        background-color: #7CD1C0;
+    }
+</style>
+
+<h1>ListRoles</h1>
+@*
+<hr />
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary mb-3 disabled" style="width:auto" asp-action="CreateRole" asp-controller="administration">Add new role</a>
+
+    @foreach (var role in Model)
+    {
+        <div class="card">
+            <div class="card-header bg-light">
+                Role Id: @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    @role.Name
+                </h5>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info" style="width:auto" asp-controller="Administration" asp-action="EditRole" asp-route-Id="@role.Id">
+                    Edit
+                </a>
+                <a class="btn btn-danger disabled" style="width:auto" asp-controller="Administration" asp-action="">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use below button to create role
+            </h5>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">
+                Create Role
+            </a>
+        </div>
+
+    </div>
+}
+
+*@
+<hr />
+@if (Model.Any())
+{
+
+<div class="row">
+    @foreach (var role in Model)
+    {
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-white  mb-3" id="total-orders">
+                    <div class="card-header">
+                        <h5 class="card-title">Role: @role.Id</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Role: @role.Name</h3>
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="EditRole" asp-route-Id="@role.Id">
+                            Edit Role
+                        </a>
+                        <a class="btn btn-danger disabled" hidden style="width:auto" asp-controller="Administration" asp-action="">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    }
+</div>
+
+}

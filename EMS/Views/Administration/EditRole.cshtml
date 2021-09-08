@@ -1,0 +1,103 @@
+﻿@model EditRoleViewModel
+
+@{
+    ViewData["Title"] = "EditRole";
+}
+
+
+<style>
+    #logo {
+    }
+
+    body {
+        background-color: #ebeff5;
+    }
+
+
+    #total-orders {
+        @*background-color: #4cb4c7;*@
+        background-color: rgb(109 164 167);
+        ;
+    }
+
+
+    #orders-delivered {
+        background-color: #7abecc;
+    }
+
+    #orders-pending {
+        background-color: #7CD1C0;
+    }
+</style>
+
+<h1><u>EditRole</u></h1>
+<hr />
+@*
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Role Id: @Model.Id
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        RoleName: @Model.RoleName
+                    </h5>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+        <div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3><u>Users assigned to  to the  @Model.RoleName role</u></h3>
+                </div>
+                <div class="card-body">
+                    @{ var count = 1; }
+                    @foreach (var item in Model.Users)
+                    {
+                        <h5 class="card-title">@count ) @item</h5>
+                        count = count + 1;
+                    }
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-Id="@Model.Id">
+                        Add/Remove Users
+                    </a>
+                </div>
+
+            </div>
+        </div>*@
+ 
+<hr />
+
+<div class="col">
+    <div class="col-md">
+        <div class="card text-center text-white  mb-3" id="total-orders">
+            <div class="card-header">
+                <h5 class="card-title">Users assigned to  to the " @Model.RoleName " role </h5>
+            </div>
+            <div class="card-body">
+                @{ var count = 1; }
+                @foreach (var item in Model.Users)
+                {
+                    <h5 class="card-title">@count ) @item</h5>
+                    count = count + 1;
+                }
+            </div>
+
+            <div class="card-footer">
+                <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-Id="@Model.Id">
+                    Add/Remove Users
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListRoles" asp-controller="Administration" class="btn btn-primary mt-3">Back to List</a>
+</div>

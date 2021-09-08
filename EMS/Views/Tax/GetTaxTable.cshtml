@@ -1,0 +1,89 @@
+﻿
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager 
+
+@model IEnumerable<EMS.ViewModels.IncomeTaxViewModel>
+
+
+@{
+    ViewData["Title"] = "GetTaxTable";
+}
+
+    <h1>Income Tax Table</h1>
+    <hr />
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Income tax data updated successfully !!!<br />
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaxableAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rate)
+                </th>
+
+           
+                @if(User.IsInRole("Admin"))
+                {
+                <th>Actions</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                string count_suffix = "";
+            }
+            @foreach (var item in Model)
+            {
+
+                // use @ only when displaying the variable otherwise donot use @ cause its inside the @foreach or @if
+                @if (count == 1)
+                    count_suffix = "UpTo Rs.";
+                else if (count == 2)
+                    count_suffix = "Next Rs.";
+                else if (count == 3)
+                    count_suffix = "Next Rs.";
+                else
+                    count_suffix = "Above Rs.";
+
+                count++;
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @count_suffix @Html.DisplayFor(modelItem => item.TaxableAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)%
+                </td>
+
+                @if(User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="EditIncomeTax" asp-route-taxId="@item.Id" asp-controller="Tax" class="btn btn-primary">Edit</a>
+                    </td>
+                }
+            
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+</div>
+</div>

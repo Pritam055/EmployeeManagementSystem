@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "List Employee";
+     
+}
+  
+<h1>All Employee</h1>
+
+<hr />
+<a asp-action="Register" asp-controller="Account" class="btn btn-primary mb-3">Add Employee</a>
+<hr />
+
+<form method="get" asp-action="ListEmployee" asp-controller="Employee">
+    <div class="input-group">
+        <input class="form-control" name="searchedString" placeholder="Search Employee..." />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>TotalSalary</th>
+                <th>PF</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{ 
+                int count = 1;
+            }
+            @foreach (var item in Model)
+            {
+            <tr>
+                @{ var photoPath = "~/images/" + (@item.Photo ?? "default.png");
+                }
+                <td>@count</td>
+                <td><img src="@photoPath" asp-append-version="true" style="height:50px; width:50px; " /></td>
+                <td>@item.EmployeeName</td>
+                <td>@item.Address</td>
+                <td>@item.Email</td>
+                <td>@item.TotalSalary</td>
+                <td>@item.PF</td>
+                <td>
+                    <form asp-action="DeleteEmployee" asp-route-empId="@item.Id" asp-controller="Employee" method="post">
+                        <a asp-action="EditEmployee" asp-route-empId="@item.Id" asp-controller="Employee" class="btn btn-primary">Edit</a>
+                        <a asp-action="GetEmployeeById" asp-route-empId="@item.Id" asp-controller="Employee" class="btn btn-info">Details</a>
+                        @if(@item.Email!=@User.Identity.Name)
+                        {  
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete @item.EmployeeName data?')" class="btn btn-danger">Delete</button>
+                        }
+
+                    </form>
+                </td>
+            </tr>
+                count++;
+            }
+
+        </tbody>
+    </table>
+</div>

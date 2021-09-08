@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Pritam\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Pritam\\.nuget\\packages"
+    ]
+  }
+}
